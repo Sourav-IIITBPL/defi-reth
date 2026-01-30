@@ -1,0 +1,11 @@
+{
+  "lib/forge-std": {
+    "rev": "b93cf4bc34ff214c099dc970b153f85ade8c9f66"
+  },
+  "lib/rocketpool": {
+    "tag": {
+      "name": "v1.3.1",
+      "rev": "8d4d5c0f1b810f97ca42cd1ceece0e7c81eb81ee"
+    }
+  }
+}
