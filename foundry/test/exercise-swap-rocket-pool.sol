@@ -150,7 +150,8 @@ contract RocketPoolSwapTest is RocketPoolTestBase {
 
     function test_swapEthToReth() public {
         console.log("Deposit enabled:", protocolSettings.getDepositEnabled());
-        uint256 ethAmount = 1e18;
+        uint256 ethAmount = protocolSettings.getMinimumDeposit();
+        console.log("Minimum Deposit required:",ethAmount);
         swap.swapEthToReth{value: ethAmount}();
 
         uint256 rEthBal = reth.balanceOf(address(swap));
@@ -169,7 +170,7 @@ contract RocketPoolSwapTest is RocketPoolTestBase {
         uint256 rEthAmount = reth.balanceOf(address(this));
         console.log("rETH balance: %e", rEthAmount);
 
-        reth.approve(address(swap), rEthAmount);
+        reth.approve(address(swap), rEthAmount);         // we have to transfer the amount of reth that this contract have to swap contract .. 
 
         uint256 ethBalBefore = address(swap).balance;
         swap.swapRethToEth(rEthAmount);
