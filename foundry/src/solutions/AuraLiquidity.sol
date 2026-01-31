@@ -4,8 +4,9 @@ pragma solidity 0.8.26;
 import {IERC20} from "../interfaces/IERC20.sol";
 import {IRETH} from "../interfaces/rocket-pool/IRETH.sol";
 import {IVault} from "../interfaces/balancer/IVault.sol";
-import {IRewardPoolDepositWrapper} from
-    "../interfaces/aura/IRewardPoolDepositWrapper.sol";
+import {
+    IRewardPoolDepositWrapper
+} from "../interfaces/aura/IRewardPoolDepositWrapper.sol";
 import {IBaseRewardPool4626} from "../interfaces/aura/IBaseRewardPool4626.sol";
 import {
     WETH,
@@ -119,7 +120,9 @@ contract AuraLiquidity {
                 minAmountsOut: minAmountsOut,
                 // EXACT_BPT_IN_FOR_ONE_TOKEN_OUT, BPT amount, index of token to withdraw
                 userData: abi.encode(
-                    IVault.ExitKind.EXACT_BPT_IN_FOR_ONE_TOKEN_OUT, bptBal, uint256(0)
+                    IVault.ExitKind.EXACT_BPT_IN_FOR_ONE_TOKEN_OUT,
+                    bptBal,
+                    uint256(0)
                 ),
                 toInternalBalance: false
             })

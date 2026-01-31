@@ -46,8 +46,7 @@ contract OpenScript is Script, AaveLib {
             address(flashLev),
             abi.encodeCall(
                 flashLev.open,
-                (
-                    FlashLev.OpenParams({
+                (FlashLev.OpenParams({
                         coin: DAI,
                         collateral: RETH,
                         colAmount: colAmount,
@@ -62,8 +61,7 @@ contract OpenScript is Script, AaveLib {
                             )
                         }),
                         minHealthFactor: MIN_HF
-                    })
-                )
+                    }))
             )
         );
 

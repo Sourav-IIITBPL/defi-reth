@@ -150,9 +150,8 @@ contract FlashLev is Pay, Token, AaveHelper, SwapHelper {
     /// @param params Parameters for opening the position including collateral and coin amounts,
     //                and minimum health factor
     function open(OpenParams calldata params) external {
-        IERC20(params.collateral).transferFrom(
-            msg.sender, address(this), params.colAmount
-        );
+        IERC20(params.collateral)
+            .transferFrom(msg.sender, address(this), params.colAmount);
 
         flashLoan({
             token: params.coin,

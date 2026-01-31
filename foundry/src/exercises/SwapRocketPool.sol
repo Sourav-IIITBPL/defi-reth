@@ -2,10 +2,12 @@
 pragma solidity 0.8.26;
 
 import {IRETH} from "../interfaces/rocket-pool/IRETH.sol";
-import {IRocketDepositPool} from
-    "../interfaces/rocket-pool/IRocketDepositPool.sol";
-import {IRocketDAOProtocolSettingsDeposit} from
-    "../interfaces/rocket-pool/IRocketDAOProtocolSettingsDeposit.sol";
+import {
+    IRocketDepositPool
+} from "../interfaces/rocket-pool/IRocketDepositPool.sol";
+import {
+    IRocketDAOProtocolSettingsDeposit
+} from "../interfaces/rocket-pool/IRocketDAOProtocolSettingsDeposit.sol";
 import {IRocketStorage} from "../interfaces/rocket-pool/IRocketStorage.sol";
 import {
     RETH,
@@ -27,7 +29,6 @@ contract SwapRocketPool {
 
     uint256 constant CALC_BASE = 1e18;
 
-
     /// @notice Calculates the amount of rETH received and fee charged for a given ETH amount.
     /// @param ethAmount The amount of ETH to be converted to rETH.
     /// @return rEthAmount The calculated amount of rETH to be received.
@@ -37,8 +38,8 @@ contract SwapRocketPool {
         view
         returns (uint256 rEthAmount, uint256 fee)
     {
-        fee = ethAmount*protocolSettings.getDepositFee()/CALC_BASE;
-        ethAmount -= fee ;          // feee must be deducted before depositing as  RocketTokenRETH.sol  only issues the reth based on amount supplied , totalsupply and totalEth in that contract, fee calcuaiton is in RocketPoolDeposit.sol
+        fee = ethAmount * protocolSettings.getDepositFee() / CALC_BASE;
+        ethAmount -= fee; // feee must be deducted before depositing as  RocketTokenRETH.sol  only issues the reth based on amount supplied , totalsupply and totalEth in that contract, fee calcuaiton is in RocketPoolDeposit.sol
         rEthAmount = reth.getRethValue(ethAmount);
     }
 
@@ -50,7 +51,7 @@ contract SwapRocketPool {
         view
         returns (uint256 ethAmount)
     {
-       ethAmount = reth.getEthValue(rEthAmount);
+        ethAmount = reth.getEthValue(rEthAmount);
     }
 
     /// @notice Retrieves the deposit availability status and maximum deposit amount.
@@ -59,13 +60,20 @@ contract SwapRocketPool {
     function getAvailability() external view returns (bool, uint256) {
         bool enable = protocolSettings.getDepositEnabled();
         uint256 maxDeposit = depositPool.getMaximumDepositAmount();
-        return (enable,maxDeposit);
+        return (enable, maxDeposit);
     }
 
     /// @notice Retrieves the deposit delay for rETH deposits.
     /// @return depositDelay The delay in blocks before deposits are processed.
     function getDepositDelay() public view returns (uint256) {
-        uint256 delay = rStorage.getUint(keccak256(abi.encodePacked(keccak256("dao.protocol.setting.network"), "network.reth.deposit.delay")));
+        uint256 delay = rStorage.getUint(
+            keccak256(
+                abi.encodePacked(
+                    keccak256("dao.protocol.setting.network"),
+                    "network.reth.deposit.delay"
+                )
+            )
+        );
         return delay;
     }
 
@@ -73,24 +81,24 @@ contract SwapRocketPool {
     /// @param user The address of the user.
     /// @return lastDepositBlock The block number of the user's last deposit.
     function getLastDepositBlock(address user) public view returns (uint256) {
-       bytes32 key = keccak256(abi.encodePacked("user.deposit.block", user));
-         uint256 lastDepositBlock = rStorage.getUint(key);
-       return lastDepositBlock;
+        bytes32 key = keccak256(abi.encodePacked("user.deposit.block", user));
+        uint256 lastDepositBlock = rStorage.getUint(key);
+        return lastDepositBlock;
     }
 
     /// @notice Swaps ETH to rETH by depositing ETH into the RocketPool deposit pool.
     /// @dev The caller must send ETH with this transaction.
     function swapEthToReth() external payable {
-        depositPool.deposit{value : msg.value}();
+        depositPool.deposit{value: msg.value}();
     }
 
+    receive() external payable {}
 
-   receive() external payable{}
     /// @notice Swaps rETH to ETH by burning rETH.
     /// @param rEthAmount The amount of rETH to be burned.
     /// @dev The caller must approve the contract to transfer the specified rETH amount.
     function swapRethToEth(uint256 rEthAmount) external {
-        reth.transferFrom(msg.sender,address(this), rEthAmount);
+        reth.transferFrom(msg.sender, address(this), rEthAmount);
         reth.burn(rEthAmount);
     }
 }

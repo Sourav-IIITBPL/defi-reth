@@ -71,10 +71,7 @@ interface IRewardsCoordinator {
         external
         view
         returns (bool);
-    function currRewardsCalculationEndTimestamp()
-        external
-        view
-        returns (uint32);
+    function currRewardsCalculationEndTimestamp() external view returns (uint32);
     function getDistributionRootsLength() external view returns (uint256);
     function getDistributionRootAtIndex(uint256 index)
         external
@@ -93,15 +90,12 @@ interface IRewardsCoordinator {
         view
         returns (uint32);
 
-    function createAVSRewardsSubmission(
-        RewardsSubmission[] calldata rewardsSubmissions
-    ) external;
-    function createRewardsForAllSubmission(
-        RewardsSubmission[] calldata rewardsSubmission
-    ) external;
-    function createRewardsForAllEarners(
-        RewardsSubmission[] calldata rewardsSubmissions
-    ) external;
+    function createAVSRewardsSubmission(RewardsSubmission[] calldata rewardsSubmissions)
+        external;
+    function createRewardsForAllSubmission(RewardsSubmission[] calldata rewardsSubmission)
+        external;
+    function createRewardsForAllEarners(RewardsSubmission[] calldata rewardsSubmissions)
+        external;
     function processClaim(RewardsMerkleClaim calldata claim, address recipient)
         external;
     function submitRoot(bytes32 root, uint32 rewardsCalculationEndTimestamp)
@@ -109,8 +103,7 @@ interface IRewardsCoordinator {
     function disableRoot(uint32 rootIndex) external;
     function setClaimerFor(address claimer) external;
     function setActivationDelay(uint32 _activationDelay) external;
-    function setGlobalOperatorCommission(uint16 _globalCommissionBips)
-        external;
+    function setGlobalOperatorCommission(uint16 _globalCommissionBips) external;
     function setRewardsUpdater(address _rewardsUpdater) external;
     function setRewardsForAllSubmitter(address _submitter, bool _newValue)
         external;

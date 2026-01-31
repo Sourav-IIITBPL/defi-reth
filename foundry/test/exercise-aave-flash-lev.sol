@@ -118,8 +118,7 @@ contract FlashLevTest is Test {
             address(flashLev),
             abi.encodeCall(
                 flashLev.open,
-                (
-                    FlashLev.OpenParams({
+                (FlashLev.OpenParams({
                         coin: DAI,
                         collateral: RETH,
                         colAmount: colAmount,
@@ -133,8 +132,7 @@ contract FlashLevTest is Test {
                             )
                         }),
                         minHealthFactor: 1.01 * 1e18
-                    })
-                )
+                    }))
             )
         );
 
@@ -154,8 +152,7 @@ contract FlashLevTest is Test {
             address(flashLev),
             abi.encodeCall(
                 flashLev.close,
-                (
-                    FlashLev.CloseParams({
+                (FlashLev.CloseParams({
                         coin: DAI,
                         collateral: RETH,
                         colAmount: colAmount,
@@ -167,8 +164,7 @@ contract FlashLevTest is Test {
                                 BALANCER_POOL_ID_RETH_WETH
                             )
                         })
-                    })
-                )
+                    }))
             )
         );
 

@@ -23,10 +23,8 @@ contract RethNav {
     /// @return The exchange rate of rETH in wei (18 decimals).
     /// @dev Ensures the price data is not stale and the rate is non-negative.
     function getExchangeRateFromChainlink() external view returns (uint256) {
-        (
-            , // uint80 roundId,
-            int256 rate,
-            , // uint256 startedAt,
+        (, // uint80 roundId,
+            int256 rate,, // uint256 startedAt,
             uint256 updatedAt,
             // uint80 answeredInRound
         ) = agg.latestRoundData();

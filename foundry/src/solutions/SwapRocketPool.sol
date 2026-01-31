@@ -2,10 +2,12 @@
 pragma solidity 0.8.26;
 
 import {IRETH} from "../interfaces/rocket-pool/IRETH.sol";
-import {IRocketDepositPool} from
-    "../interfaces/rocket-pool/IRocketDepositPool.sol";
-import {IRocketDAOProtocolSettingsDeposit} from
-    "../interfaces/rocket-pool/IRocketDAOProtocolSettingsDeposit.sol";
+import {
+    IRocketDepositPool
+} from "../interfaces/rocket-pool/IRocketDepositPool.sol";
+import {
+    IRocketDAOProtocolSettingsDeposit
+} from "../interfaces/rocket-pool/IRocketDAOProtocolSettingsDeposit.sol";
 import {IRocketStorage} from "../interfaces/rocket-pool/IRocketStorage.sol";
 import {
     RETH,

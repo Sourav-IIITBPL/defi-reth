@@ -23,9 +23,9 @@ interface IDelegationManager {
         address withdrawer;
     }
 
-    function queueWithdrawals(
-        QueuedWithdrawalParams[] calldata queuedWithdrawalParams
-    ) external returns (bytes32[] memory);
+    function queueWithdrawals(QueuedWithdrawalParams[] calldata queuedWithdrawalParams)
+        external
+        returns (bytes32[] memory);
 
     struct Withdrawal {
         address staker;

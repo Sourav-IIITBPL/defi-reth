@@ -3,8 +3,9 @@
 pragma solidity ^0.8;
 
 import "forge-std/Test.sol";
-import {IRewardsCoordinator} from
-    "@src/interfaces/eigen-layer/IRewardsCoordinator.sol";
+import {
+    IRewardsCoordinator
+} from "@src/interfaces/eigen-layer/IRewardsCoordinator.sol";
 import {IERC20} from "@src/interfaces/IERC20.sol";
 import {ERC20} from "@src/ERC20.sol";
 
@@ -79,8 +80,7 @@ contract RewardsHelper is Test {
             uint256 cumulativeEarnings =
                 stdJson.readUint(claimProofData, amountKey);
             tokenLeaves[i] = IRewardsCoordinator.TokenTreeMerkleLeaf({
-                token: address(token),
-                cumulativeEarnings: cumulativeEarnings
+                token: address(token), cumulativeEarnings: cumulativeEarnings
             });
             tokenIndices[i] =
                 uint32(stdJson.readUint(claimProofData, leafIndicesKey));
@@ -113,18 +113,17 @@ contract RewardsHelper is Test {
         );
 
         IRewardsCoordinator.RewardsMerkleClaim memory newClaim =
-        IRewardsCoordinator.RewardsMerkleClaim({
-            rootIndex: rootIndex,
-            earnerIndex: earnerIndex,
-            earnerTreeProof: earnerTreeProof,
-            earnerLeaf: IRewardsCoordinator.EarnerTreeMerkleLeaf({
-                earner: earner,
-                earnerTokenRoot: earnerTokenRoot
-            }),
-            tokenIndices: tokenIndices,
-            tokenTreeProofs: tokenTreeProofs,
-            tokenLeaves: tokenLeaves
-        });
+            IRewardsCoordinator.RewardsMerkleClaim({
+                rootIndex: rootIndex,
+                earnerIndex: earnerIndex,
+                earnerTreeProof: earnerTreeProof,
+                earnerLeaf: IRewardsCoordinator.EarnerTreeMerkleLeaf({
+                        earner: earner, earnerTokenRoot: earnerTokenRoot
+                    }),
+                tokenIndices: tokenIndices,
+                tokenTreeProofs: tokenTreeProofs,
+                tokenLeaves: tokenLeaves
+            });
 
         return newClaim;
     }

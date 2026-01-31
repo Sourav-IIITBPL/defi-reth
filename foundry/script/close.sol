@@ -33,8 +33,7 @@ contract CloseScript is Script, AaveLib {
             address(flashLev),
             abi.encodeCall(
                 flashLev.close,
-                (
-                    FlashLev.CloseParams({
+                (FlashLev.CloseParams({
                         coin: DAI,
                         collateral: RETH,
                         colAmount: RETH_AMOUNT,
@@ -46,8 +45,7 @@ contract CloseScript is Script, AaveLib {
                                 BALANCER_POOL_ID_RETH_WETH
                             )
                         })
-                    })
-                )
+                    }))
             )
         );
 

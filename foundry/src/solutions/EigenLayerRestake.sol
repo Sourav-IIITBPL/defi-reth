@@ -4,10 +4,12 @@ pragma solidity 0.8.26;
 import {IERC20} from "../interfaces/IERC20.sol";
 import {IStrategyManager} from "../interfaces/eigen-layer/IStrategyManager.sol";
 import {IStrategy} from "../interfaces/eigen-layer/IStrategy.sol";
-import {IDelegationManager} from
-    "../interfaces/eigen-layer/IDelegationManager.sol";
-import {IRewardsCoordinator} from
-    "../interfaces/eigen-layer/IRewardsCoordinator.sol";
+import {
+    IDelegationManager
+} from "../interfaces/eigen-layer/IDelegationManager.sol";
+import {
+    IRewardsCoordinator
+} from "../interfaces/eigen-layer/IRewardsCoordinator.sol";
 import {
     RETH,
     EIGEN_LAYER_STRATEGY_MANAGER,
@@ -53,9 +55,7 @@ contract EigenLayerRestake {
         reth.transferFrom(msg.sender, address(this), rethAmount);
         reth.approve(address(strategyManager), rethAmount);
         shares = strategyManager.depositIntoStrategy({
-            strategy: address(strategy),
-            token: RETH,
-            amount: rethAmount
+            strategy: address(strategy), token: RETH, amount: rethAmount
         });
     }
 
@@ -67,8 +67,7 @@ contract EigenLayerRestake {
         delegationManager.delegateTo({
             operator: operator,
             approverSignatureAndExpiry: IDelegationManager.SignatureWithExpiry({
-                signature: "",
-                expiry: 0
+                signature: "", expiry: 0
             }),
             approverSalt: bytes32(uint256(0))
         });
@@ -103,24 +102,22 @@ contract EigenLayerRestake {
         uint256[] memory _shares = new uint256[](1);
         _shares[0] = shares;
 
-        IDelegationManager.Withdrawal memory withdrawal = IDelegationManager
-            .Withdrawal({
-            staker: address(this),
-            delegatedTo: operator,
-            withdrawer: address(this),
-            nonce: 0,
-            startBlock: startBlockNum,
-            strategies: strategies,
-            shares: _shares
-        });
+        IDelegationManager.Withdrawal memory withdrawal =
+            IDelegationManager.Withdrawal({
+                staker: address(this),
+                delegatedTo: operator,
+                withdrawer: address(this),
+                nonce: 0,
+                startBlock: startBlockNum,
+                strategies: strategies,
+                shares: _shares
+            });
 
         address[] memory tokens = new address[](1);
         tokens[0] = RETH;
 
         delegationManager.completeQueuedWithdrawal({
-            withdrawal: withdrawal,
-            tokens: tokens,
-            receiveAsTokens: true
+            withdrawal: withdrawal, tokens: tokens, receiveAsTokens: true
         });
     }
 
@@ -185,9 +182,10 @@ contract EigenLayerRestake {
     /// @notice Get the number of shares held in the strategy for the current staker
     /// @return The number of shares held in the EigenLayer strategy
     function getShares() external view returns (uint256) {
-        return strategyManager.stakerDepositShares(
-            address(this), address(strategy)
-        );
+        return
+            strategyManager.stakerDepositShares(
+                address(this), address(strategy)
+            );
     }
 
     /// @notice Get the withdrawal delay for the current staker

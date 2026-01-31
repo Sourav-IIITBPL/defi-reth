@@ -3,13 +3,16 @@ pragma solidity ^0.8;
 
 import {Test, console} from "forge-std/Test.sol";
 import {IERC20} from "@src/interfaces/IERC20.sol";
-import {IStrategyManager} from
-    "@src/interfaces/eigen-layer/IStrategyManager.sol";
+import {
+    IStrategyManager
+} from "@src/interfaces/eigen-layer/IStrategyManager.sol";
 import {IStrategy} from "@src/interfaces/eigen-layer/IStrategy.sol";
-import {IDelegationManager} from
-    "@src/interfaces/eigen-layer/IDelegationManager.sol";
-import {IRewardsCoordinator} from
-    "@src/interfaces/eigen-layer/IRewardsCoordinator.sol";
+import {
+    IDelegationManager
+} from "@src/interfaces/eigen-layer/IDelegationManager.sol";
+import {
+    IRewardsCoordinator
+} from "@src/interfaces/eigen-layer/IRewardsCoordinator.sol";
 import {RewardsHelper} from "./eigen-layer/RewardsHelper.sol";
 import {
     RETH,

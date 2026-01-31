@@ -4,8 +4,9 @@ pragma solidity 0.8.26;
 import {IERC20} from "../interfaces/IERC20.sol";
 import {IRETH} from "../interfaces/rocket-pool/IRETH.sol";
 import {IVault} from "../interfaces/balancer/IVault.sol";
-import {IRewardPoolDepositWrapper} from
-    "../interfaces/aura/IRewardPoolDepositWrapper.sol";
+import {
+    IRewardPoolDepositWrapper
+} from "../interfaces/aura/IRewardPoolDepositWrapper.sol";
 import {IBaseRewardPool4626} from "../interfaces/aura/IBaseRewardPool4626.sol";
 import {
     WETH,

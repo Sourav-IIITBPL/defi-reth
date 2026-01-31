@@ -4,8 +4,9 @@ pragma solidity ^0.8;
 import {Test, console} from "forge-std/Test.sol";
 import {IRETH} from "@src/interfaces/rocket-pool/IRETH.sol";
 import {IERC20} from "@src/interfaces/IERC20.sol";
-import {IRocketDepositPool} from
-    "@src/interfaces/rocket-pool/IRocketDepositPool.sol";
+import {
+    IRocketDepositPool
+} from "@src/interfaces/rocket-pool/IRocketDepositPool.sol";
 import {ISwapRouter} from "@src/interfaces/uniswap/ISwapRouter.sol";
 import {
     RETH,

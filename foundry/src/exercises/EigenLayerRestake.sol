@@ -4,10 +4,12 @@ pragma solidity 0.8.26;
 import {IERC20} from "../interfaces/IERC20.sol";
 import {IStrategyManager} from "../interfaces/eigen-layer/IStrategyManager.sol";
 import {IStrategy} from "../interfaces/eigen-layer/IStrategy.sol";
-import {IDelegationManager} from
-    "../interfaces/eigen-layer/IDelegationManager.sol";
-import {IRewardsCoordinator} from
-    "../interfaces/eigen-layer/IRewardsCoordinator.sol";
+import {
+    IDelegationManager
+} from "../interfaces/eigen-layer/IDelegationManager.sol";
+import {
+    IRewardsCoordinator
+} from "../interfaces/eigen-layer/IRewardsCoordinator.sol";
 import {
     RETH,
     EIGEN_LAYER_STRATEGY_MANAGER,
@@ -139,17 +141,17 @@ contract EigenLayerRestake {
     /// @dev This function processes a rewards claim by interacting with the RewardsCoordinator.
     ///      It allows the owner to claim rewards associated with their staked RETH.
     function claimRewards(IRewardsCoordinator.RewardsMerkleClaim memory claim)
-        external
-    {
+        external {
         // Write your code here
     }
 
     /// @notice Get the number of shares held in the strategy for the current staker
     /// @return The number of shares held in the EigenLayer strategy
     function getShares() external view returns (uint256) {
-        return strategyManager.stakerDepositShares(
-            address(this), address(strategy)
-        );
+        return
+            strategyManager.stakerDepositShares(
+                address(this), address(strategy)
+            );
     }
 
     /// @notice Get the withdrawal delay for the current staker

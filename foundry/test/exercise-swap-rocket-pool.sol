@@ -4,10 +4,12 @@ pragma solidity ^0.8;
 import {Test, console} from "forge-std/Test.sol";
 import {IRETH} from "@src/interfaces/rocket-pool/IRETH.sol";
 import {IRocketStorage} from "@src/interfaces/rocket-pool/IRocketStorage.sol";
-import {IRocketDepositPool} from
-    "@src/interfaces/rocket-pool/IRocketDepositPool.sol";
-import {IRocketDAOProtocolSettingsDeposit} from
-    "@src/interfaces/rocket-pool/IRocketDAOProtocolSettingsDeposit.sol";
+import {
+    IRocketDepositPool
+} from "@src/interfaces/rocket-pool/IRocketDepositPool.sol";
+import {
+    IRocketDAOProtocolSettingsDeposit
+} from "@src/interfaces/rocket-pool/IRocketDAOProtocolSettingsDeposit.sol";
 import {
     RETH,
     ROCKET_STORAGE,
@@ -151,7 +153,7 @@ contract RocketPoolSwapTest is RocketPoolTestBase {
     function test_swapEthToReth() public {
         console.log("Deposit enabled:", protocolSettings.getDepositEnabled());
         uint256 ethAmount = protocolSettings.getMinimumDeposit();
-        console.log("Minimum Deposit required:",ethAmount);
+        console.log("Minimum Deposit required:", ethAmount);
         swap.swapEthToReth{value: ethAmount}();
 
         uint256 rEthBal = reth.balanceOf(address(swap));
@@ -170,7 +172,7 @@ contract RocketPoolSwapTest is RocketPoolTestBase {
         uint256 rEthAmount = reth.balanceOf(address(this));
         console.log("rETH balance: %e", rEthAmount);
 
-        reth.approve(address(swap), rEthAmount);         // we have to transfer the amount of reth that this contract have to swap contract .. 
+        reth.approve(address(swap), rEthAmount); // we have to transfer the amount of reth that this contract have to swap contract ..
 
         uint256 ethBalBefore = address(swap).balance;
         swap.swapRethToEth(rEthAmount);
